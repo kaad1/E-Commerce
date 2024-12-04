@@ -10,6 +10,7 @@ namespace BulkyWeb.Data
            
         }
         public DbSet<Category> Categories { get; set; }
+
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,5 +19,6 @@ namespace BulkyWeb.Data
                 new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 });
         }
+
     }
 }
