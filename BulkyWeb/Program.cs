@@ -1,3 +1,6 @@
+using BulkyWeb.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace BulkyWeb
 {
     public class Program
@@ -8,6 +11,9 @@ namespace BulkyWeb
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidCastException("Default Connection not found");
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
 
             var app = builder.Build();
 
