@@ -4,8 +4,6 @@ using BulkyWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-﻿using Microsoft.AspNetCore.Mvc;
-
 
 namespace BulkyWeb.Controllers
 {
@@ -18,16 +16,30 @@ namespace BulkyWeb.Controllers
         {
             this._db = db;
         }
-        public async Task <IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
-           List<Category> objCategoryList=await _db.Categories.ToListAsync();
-           
-           return View(objCategoryList);
+            List<Category> objCategoryList = await _db.Categories.ToListAsync();
 
-        public IActionResult Index()
-        {
-            return View();
+            return View(objCategoryList);
 
         }
+        
+        public async Task <IActionResult> Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.AddAsync(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+      
+
     }
 }
