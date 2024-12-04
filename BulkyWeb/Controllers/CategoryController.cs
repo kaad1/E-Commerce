@@ -31,6 +31,8 @@ namespace BulkyWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Category obj)
         {
+           
+
             if (ModelState.IsValid)
             {
                 _db.Categories.AddAsync(obj);
